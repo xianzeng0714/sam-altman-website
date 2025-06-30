@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sam Altman - Writings & Insights</title>
+    <style>
+        :root {
+            --primary: #0066cc;
+            --secondary: #f8f9fa;
+            --dark: #212529;
+            --light: #ffffff;
+            --accent: #17a2b8;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--light);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: var(--dark);
+            transition: all 0.3s ease;
+        }
+        
+        .hero {
+            padding: 60px 0;
+            text-align: center;
+            background-color: var(--secondary);
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .content-section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--dark);
+        }
+        
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .card {
+            background-color: var(--light);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .card-date {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+        
+        .card-description {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .card-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: var(--primary);
+            color: var(--light);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .card-link:hover {
+            background-color: #0055aa;
+        }
+        
+        .section-divider {
+            height: 2px;
+            background-color: var(--light-gray);
+            margin: 40px 0;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+        
+        .chart-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: var(--light);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        canvas {
+            width: 100%;
+            height: auto;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-links {
+            display: flex;
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light);
+            color: var(--dark);
+            margin: 0 10px;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            color: var(--light);
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: var(--light);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+                padding: 20px 0;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            
+            .card-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Sam Altman</a>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Projects/Ventures</a></li>
+                    <li><a href="#" class="active">Writings/Insights</a></li>
+                    <li><a href="#">Media/Press</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Writings & Insights</h1>
+            <p>Explore my thoughts, interviews, talks, and articles on AI, technology, and business.</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Interviews</h2>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">Hard Fork Podcast (NYT)</h3>
+                        <p class="card-date">June 2025</p>
+                        <p class="card-description">A discussion on AI regulation, safety concerns, competition for AI talent, and the NYT lawsuit.</p>
+                        <a href="https://nytimes.com/2025/06/25/technology/hard-fork-sam-altman.html" class="card-link" target="_blank">Read More</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">Stratechery Interview</h3>
+                        <p class="card-date">March 2025</p>
+                        <p class="card-description">An interview covering the path to OpenAI, its original vision, and business strategy.</p>
+                        <a href="https://stratechery.com/2025/an-interview-with-openai-ceo-sam-altman-about-building-a-consumer-tech-company" class="card-link" target="_blank">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Talks</h2>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">AI Summit in Paris</h3>
+                        <p class="card-date">February 11, 2025</p>
+                        <p class="card-description">Examines AI's transformative role in business, emphasizing the need for adaptation and innovation.</p>
+                        <a href="https://youtube.com/watch?v=8JZh3zLrmRE" class="card-link" target="_blank">Watch Talk</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">World Government Summit</h3>
+                        <p class="card-date">February 12, 2024</p>
+                        <p class="card-description">Explores AI's impact on governance and the future of work, addressing the challenges and opportunities presented by the digital revolution.</p>
+                        <a href="https://youtube.com/watch?v=15UZCAr3shU" class="card-link" target="_blank">Watch Talk</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">Harvard Business School</h3>
+                        <p class="card-date">May 1, 2024</p>
+                        <p class="card-description">Addresses ethical considerations, scientific breakthroughs, and the societal implications of AI, providing insights into OpenAI's approach to responsible AI development.</p>
+                        <a href="https://hbs.edu/bigs/120-minutes-with-openai-ceo-sam-altman" class="card-link" target="_blank">Watch Talk</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Articles/Commentary</h2>
+            <div class="card-container">
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">Fortune Article</h3>
+                        <p class="card-date">June 2025</p>
+                        <p class="card-description">Altman discusses the impact of AI on employment, stating AI is 'as good as interns' for entry-level work.</p>
+                        <a href="https://fortune.com/2025/06/05/openai-ceo-sam-altman-ai-as-good-as-interns-entry-level-workers-gen-z-embrace-technology" class="card-link" target="_blank">Read Article</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Content Analytics</h2>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">Articles Published</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">28</div>
+                    <div class="stat-label">Talks Given</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">42</div>
+                    <div class="stat-label">Interviews</div>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="contentChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter">T</a>
+                    <a href="#" aria-label="LinkedIn">L</a>
+                    <a href="#" aria-label="GitHub">G</a>
+                </div>
+                <p class="copyright">© 2025 Sam Altman. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links li').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Content chart
+        const ctx = document.getElementById('contentChart').getContext('2d');
+        
+        // Simple chart implementation without external libraries
+        function drawChart() {
+            const data = [15, 28, 42];
+            const labels = ['Articles', 'Talks', 'Interviews'];
+            const colors = ['#0066cc', '#17a2b8', '#6c757d'];
+            const maxValue = Math.max(...data);
+            const chartHeight = 200;
+            const chartWidth = ctx.canvas.width;
+            const barWidth = chartWidth / (data.length * 2);
+            const spacing = barWidth / 2;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, chartWidth, ctx.canvas.height);
+            
+            // Draw bars
+            for (let i = 0; i < data.length; i++) {
+                const barHeight = (data[i] / maxValue) * chartHeight;
+                const x = i * (barWidth * 2) + spacing;
+                const y = chartHeight - barHeight + 50; // Add padding for labels
+                
+                ctx.fillStyle = colors[i];
+                ctx.fillRect(x, y, barWidth, barHeight);
+                
+                // Add value on top of bar
+                ctx.fillStyle = '#212529';
+                ctx.font = '12px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(data[i], x + barWidth / 2, y - 5);
+                
+                // Add label below bar
+                ctx.fillText(labels[i], x + barWidth / 2, chartHeight + 70);
+            }
+            
+            // Draw y-axis
+            ctx.beginPath();
+            ctx.moveTo(0, 50);
+            ctx.lineTo(0, chartHeight + 50);
+            ctx.strokeStyle = '#e9ecef';
+            ctx.stroke();
+            
+            // Draw x-axis
+            ctx.beginPath();
+            ctx.moveTo(0, chartHeight + 50);
+            ctx.lineTo(chartWidth, chartHeight + 50);
+            ctx.strokeStyle = '#e9ecef';
+            ctx.stroke();
+        }
+        
+        // Draw chart on load and resize
+        window.addEventListener('load', drawChart);
+        window.addEventListener('resize', drawChart);
+    </script>
+</body>
+</html>
