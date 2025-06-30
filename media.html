@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sam Altman - Media & Press</title>
+    <style>
+        :root {
+            --primary: #0066cc;
+            --secondary: #f8f9fa;
+            --dark: #212529;
+            --light: #ffffff;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--light);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark);
+            text-decoration: none;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            padding-bottom: 5px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        nav ul li a.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin: 50px 0;
+        }
+        
+        .page-title h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .media-item {
+            background-color: var(--light);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+        
+        .media-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .media-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .media-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .media-item:hover .media-image img {
+            transform: scale(1.05);
+        }
+        
+        .media-content {
+            padding: 20px;
+        }
+        
+        .media-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .media-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        .media-summary {
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .media-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: var(--primary);
+            color: var(--light);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .media-link:hover {
+            background-color: #0055aa;
+            transform: translateY(-2px);
+        }
+        
+        footer {
+            background-color: var(--secondary);
+            padding: 40px 0;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .social-links a {
+            margin-right: 15px;
+            color: var(--dark);
+            font-size: 20px;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                right: 20px;
+                top: 20px;
+            }
+            
+            nav {
+                width: 100%;
+                max-height: 0;
+                overflow: hidden;
+                transition: var(--transition);
+            }
+            
+            nav.active {
+                max-height: 300px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                margin-top: 20px;
+            }
+            
+            nav ul li {
+                margin: 0;
+                width: 100%;
+                text-align: center;
+                padding: 10px 0;
+                border-bottom: 1px solid var(--light-gray);
+            }
+            
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .social-links {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">Sam Altman</a>
+                <button class="mobile-menu-btn">☰</button>
+                <nav id="main-nav">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Projects</a></li>
+                        <li><a href="#">Writings</a></li>
+                        <li><a href="#" class="active">Media</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="page-title">
+                <h1>Media & Press</h1>
+                <p>A collection of interviews, articles, and public appearances</p>
+            </div>
+
+            <div class="media-grid">
+                <div class="media-item">
+                    <div class="media-image">
+                        <img src="https://i.ytimg.com/vi/5MWT_doo68k/maxresdefault.jpg" alt="Sam Altman on Hard Fork Podcast">
+                    </div>
+                    <div class="media-content">
+                        <h2 class="media-title">Hard Fork Podcast (The New York Times)</h2>
+                        <div class="media-meta">
+                            <span class="media-source">The New York Times</span>
+                            <span class="media-date">June 2025</span>
+                        </div>
+                        <p class="media-summary">Sam Altman discusses AI regulation, safety concerns, the intense competition for AI talent, and responds to the lawsuit from The New York Times.</p>
+                        <a href="https://nytimes.com/2025/06/25/technology/hard-fork-sam-altman.html" class="media-link" target="_blank">Listen Now</a>
+                    </div>
+                </div>
+
+                <div class="media-item">
+                    <div class="media-image">
+                        <img src="https://techcrunch.com/wp-content/uploads/2024/12/GettyImages-2188228027.jpg" alt="Sam Altman on Stratechery">
+                    </div>
+                    <div class="media-content">
+                        <h2 class="media-title">Stratechery Interview</h2>
+                        <div class="media-meta">
+                            <span class="media-source">Stratechery</span>
+                            <span class="media-date">March 2025</span>
+                        </div>
+                        <p class="media-summary">An in-depth conversation about OpenAI's journey from its original vision to becoming a major consumer tech company, its business strategy, and what's next for products like GPT-5.</p>
+                        <a href="https://stratechery.com/2025/an-interview-with-openai-ceo-sam-altman-about-building-a-consumer-tech-company" class="media-link" target="_blank">Read More</a>
+                    </div>
+                </div>
+
+                <div class="media-item">
+                    <div class="media-image">
+                        <img src="https://img-cdn.inc.com/image/upload/f_webp,q_auto,c_fit/images/panoramic/sam-altman-openai-inc-GettyImages-2153474140_541366_fazzk1.jpg" alt="Sam Altman in Fortune Magazine">
+                    </div>
+                    <div class="media-content">
+                        <h2 class="media-title">Fortune Magazine Article</h2>
+                        <div class="media-meta">
+                            <span class="media-source">Fortune Magazine</span>
+                            <span class="media-date">June 2025</span>
+                        </div>
+                        <p class="media-summary">Altman comments on the impact of AI on the job market, stating that AI is now 'as good as interns' for certain entry-level tasks, sparking a debate on the future of work for the next generation.</p>
+                        <a href="https://fortune.com/2025/06/05/openai-ceo-sam-altman-ai-as-good-as-interns-entry-level-workers-gen-z-embrace-technology" class="media-link" target="_blank">Read More</a>
+                    </div>
+                </div>
+
+                <div class="media-item">
+                    <div class="media-image">
+                        <img src="https://i.ytimg.com/vi/8JZh3zLrmRE/maxresdefault.jpg" alt="Sam Altman at AI Summit in Paris">
+                    </div>
+                    <div class="media-content">
+                        <h2 class="media-title">AI Summit in Paris</h2>
+                        <div class="media-meta">
+                            <span class="media-source">Public Talk</span>
+                            <span class="media-date">February 2025</span>
+                        </div>
+                        <p class="media-summary">Altman examines AI's transformative role in business, emphasizing the need for adaptation and innovation and urging businesses to embrace AI-driven strategies to maintain competitiveness.</p>
+                        <a href="https://youtube.com/watch?v=8JZh3zLrmRE" class="media-link" target="_blank">Watch Now</a>
+                    </div>
+                </div>
+
+                <div class="media-item">
+                    <div class="media-image">
+                        <img src="https://d.newsweek.com/en/full/2414608/openai-ceo-sam-altman-congressional-hearing.jpg?w=1200&f=c1c9f15e2b634ad7dd4c93b077eee4f2" alt="Sam Altman at World Government Summit">
+                    </div>
+                    <div class="media-content">
+                        <h2 class="media-title">World Government Summit</h2>
+                        <div class="media-meta">
+                            <span class="media-source">Public Talk</span>
+                            <span class="media-date">February 2024</span>
+                        </div>
+                        <p class="media-summary">A talk exploring AI's impact on governance, the digital economy, and the future of work, addressing the challenges and opportunities presented by the digital revolution.</p>
+                        <a href="https://youtube.com/watch?v=15UZCAr3shU" class="media-link" target="_blank">Watch Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="https://twitter.com/sama" target="_blank">Twitter</a>
+                    <a href="https://www.linkedin.com/in/altmansam/" target="_blank">LinkedIn</a>
+                </div>
+                <div class="copyright">
+                    &copy; <span id="current-year"></span> Sam Altman. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mainNav = document.getElementById('main-nav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+        
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Add animation on scroll
+        const mediaItems = document.querySelectorAll('.media-item');
+        
+        function checkScroll() {
+            mediaItems.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (itemTop < windowHeight - 100) {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // Initialize items with opacity 0 and translateY
+        mediaItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+        
+        // Check on load and scroll
+        window.addEventListener('load', checkScroll);
+        window.addEventListener('scroll', checkScroll);
+    </script>
+</body>
+</html>
